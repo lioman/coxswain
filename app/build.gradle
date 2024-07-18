@@ -9,12 +9,11 @@ if (project.hasProperty("coxswain-private") && new File(project.property("coxswa
 }
 
 android {
-    compileSdkVersion 30
-
     defaultConfig {
+        compileSdk 34
         applicationId "svenmeier.coxswain"
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 34
 
         versionCode Integer.parseInt(project.property("coxswain-versionCode"))
         versionName project.property("coxswain-versionName")
@@ -35,8 +34,8 @@ android {
 
 ext {
     supportLibraryVersion = '1.0.0'
-    playFitServicesVersion = '20.0.0'
-    playAuthServicesVersion = '19.0.0'
+    playFitServicesVersion = '21.2.0'
+    playAuthServicesVersion = '21.2.0'
 }
 
 dependencies {
@@ -50,9 +49,12 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:$playAuthServicesVersion"
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     testImplementation 'junit:junit:4.13'
-    testImplementation('org.robolectric:robolectric:4.3.1') {
+    testImplementation('org.robolectric:robolectric:4.13') {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+    androidTestImplementation('com.google.android:android-test:4.1.1.4') {
+        exclude group: 'xpp3', module: 'xpp3'
     }
     implementation project(':propoid-core')
     implementation project(':propoid-db')
